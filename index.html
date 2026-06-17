@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>SHAHIRYAR ABRO</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  font-family: Cambria Math;
+}
+body{
+  min-height: 100vh;
+  background: linear-gradient(145deg, #0a0f1f 0%, #121b2f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  padding: 20px;
+  position: relative;
+}
+body::before{
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 180, 70, 0.08), transparent 70%);
+  pointer-events: none;
+}
+.eternal-card{
+  max-width: 860px;
+  width: 100%;
+  background: rgba(12, 20, 35, 0.75);
+  backdrop-filter: blur(20px);
+  border-radius: 2px;
+  box-shadow: 0 30px 55px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 150, 0.2);
+  padding: 2rem 2rem 2.2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+.live-header{
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: 1rem 1.8rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 2px solid rgba(255, 200, 100, 0.3);
+}
+.digital-clock{
+  font-size: 2.3rem;
+  font-weight: 800;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, #FFE6B0, #FFAE42);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 3px;
+}
+.date-stack{
+  text-align: right;
+}
+.weekday-big{
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFD966;
+}
+.full-date-text{
+  font-size: 0.8rem;
+  color: #aab7d4;
+}
+.stored-badge{
+  background: rgba(255, 175, 75, 0.18);
+  border-radius: 2px;
+  padding: 0.6rem 1.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 200, 100, 0.4);
+}
+.stored-label{
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #FFBC6E;
+}
+.stored-value{
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #FFDFA5;
+  margin-top: 4px;
+}
+/* RINGTONE MANAGER PANEL */
+.ringtone-manager {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgba(255, 200, 100, 0.3);
+}
+.ring-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.ring-label {
+  color: #FFD966;
+  font-weight: 600;
+  font-size: 0.75rem;
+  background: rgba(0,0,0,0.5);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.ring-btn {
+  background: linear-gradient(105deg, #2c3e66, #1a2a4f);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 2px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: 0.2s;
+}
+.ring-btn:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+.remove-ring-btn {
+  background: linear-gradient(105deg, #7f3e2c, #a5260f);
+}
+.test-ring-btn {
+  background: linear-gradient(105deg, #e67e22, #d35400);
+}
+.ring-status {
+  font-size: 0.7rem;
+  color: #2ecc71;
+  background: rgba(0,0,0,0.4);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.countdown-titan{
+  background: linear-gradient(125deg, rgba(0, 0, 0, 0.6), rgba(20, 30, 55, 0.8));
+  border-radius: 2px;
+  padding: 1.8rem 1.2rem;
+  margin: 1.2rem 0 1.5rem;
+  border: 1px solid rgba(255, 180, 80, 0.6);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+.countdown-title{
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #FFD966;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.timer-grid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 1rem 0;
+}
+.time-box{
+  background: rgba(0, 0, 0, 0.65);
+  min-width: 95px;
+  text-align: center;
+  padding: 1.2rem 0.5rem;
+  border-radius: 40px;
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s;
+}
+.time-number{
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFE6B0, #FFB347);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-feature-settings: "tnum";
+  line-height: 1;
+}
+.time-unit{
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #B9CAF0;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+}
+.next-birthday-detail{
+  background: rgba(255, 190, 80, 0.12);
+  border-radius: 2px;
+  padding: 10px 16px;
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 500;
+  color: #FFE0A0;
+  font-size: 0.9rem;
+}
+.age-container{
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.age-chip{
+  background: rgba(0, 0, 0, 0.45);
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  border-radius:2px;
+}
+.age-chip-label{
+  font-size: 0.7rem;
+  color: #89A0D4;
+}
+.age-chip-value{
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #FFD38B;
+}
+.setup-section{
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  padding: 1.4rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s;
+}
+.setup-title{
+  color: #FFD966;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.setup-input{
+  width: 100%;
+  padding: 1rem;
+  border-radius: 2px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.setup-btn{
+  background: linear-gradient(105deg, #F5A623, #E07C1F);
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 2px;
+  font-weight: 800;
+  color: #1a1f2e;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.reset-link{
+  text-align: center;
+  margin-top: 18px;
+}
+.reset-btn{
+  background: none;
+  border: 1px solid rgba(255, 170, 80, 0.5);
+  padding: 6px 18px;
+  border-radius: 2px;
+  color: #FFBC6E;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: 0.2s;
+}
+.control-panel{
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: 1rem 1.2rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.btn-icon{
+  background: linear-gradient(105deg, #2c3e66, #1a2a4f);
+  border: none;
+  padding: 8px 20px;
+  border-radius: 2px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: 0.2s;
+}
+.btn-icon:hover{
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+.btn-ring{
+  background: linear-gradient(105deg, #FF8C42, #FF6B2C);
+}
+.btn-stop{
+  background: linear-gradient(105deg, #e74c3c, #c0392b);
+}
+.btn-secret{
+  background: linear-gradient(105deg, #8e44ad, #6c3483);
+}
+/*========= MINI COUNTER MODAL =========*/
+.modal-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.modal-overlay.active{
+  opacity: 1;
+  visibility: visible;
+}
+.mini-counter-modal{
+  background: linear-gradient(145deg, #1a1f2e, #0f1420);
+  border-radius: 2px;
+  max-width: 500px;
+  width: 90%;
+  padding: 2rem;
+  border: 2px solid rgba(255, 180, 80, 0.5);
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+}
+.mini-title{
+  color: #FFD966;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.password-input{
+  width: 100%;
+  padding: 1rem;
+  border-radius: 2px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.mini-timer-grid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+}
+.mini-time-box{
+  background: rgba(0, 0, 0, 0.6);
+  min-width: 70px;
+  text-align: center;
+  padding: 1rem 0.3rem;
+  border-radius: 32px;
+}
+.mini-time-number{
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFE6B0, #FFB347);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.mini-time-unit{
+  font-size: 0.6rem;
+  color: #B9CAF0;
+}
+.close-modal-btn{
+  background: linear-gradient(105deg, #e74c3c, #c0392b);
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 2px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.ringtone-active{
+  animation: pulse-glow 0.8s ease-in-out infinite;
+}
+@keyframes pulse-glow{
+  0%, 100% { text-shadow: 0 0 5px #FFAE42; }
+  50% { text-shadow: 0 0 20px #FF6B2C; }
+}
+.footer-mem{
+  font-size: 0.65rem;
+  text-align: center;
+  color: #5e6e91;
+  margin-top: 1.5rem;
+}
+@media (max-width: 600px){
+  .eternal-card{ padding: 1.5rem; }
+  .time-number{ font-size: 1.8rem; }
+  .time-box{ min-width: 70px; }
+}
+</style>
+</head>
+<body>
+
+<div class="eternal-card" id="mainApp">
+<div class="live-header">
+  <div class="digital-clock" id="liveClockDisplay">--:--:--</div>
+  <div class="date-stack">
+  <div class="weekday-big" id="todayWeekday">—</div>
+  <div class="full-date-text" id="todayFullDate">—</div>
+</div>
+</div>
+
+<!-- CUSTOM RINGTONE MANAGER - UPLOAD & REMOVE BUTTON -->
+<div class="ringtone-manager" id="ringtoneManager">
+  <div class="ring-controls">
+    <span class="ring-label">CUSTOM RINGTONE</span>
+    <input type="file" id="ringtoneUploadInput" accept="audio/mpeg,audio/mp3,audio/wav,audio/ogg" style="display: none;">
+    <button class="ring-btn" id="uploadRingBtn">Upload Ringtone</button>
+    <button class="ring-btn test-ring-btn" id="testRingBtn">Test Ringtone</button>
+    <button class="ring-btn remove-ring-btn" id="removeRingBtn">Remove Ringtone</button>
+  </div>
+  <div class="ring-status" id="ringStatusText">Default melody</div>
+</div>
+
+<div class="stored-badge" id="storedBadgeArea" style="display: none;">
+  <div class="stored-value" id="storedBirthdayText">—</div>
+</div>
+
+<div class="countdown-titan" id="countdownLiveArea">
+  <div class="countdown-title">REAL TIME COUNTDOWN</div>
+<div class="timer-grid">
+  <div class="time-box"><div class="time-number" id="remDaysNum">--</div><div class="time-unit">DAYS</div></div>
+  <div class="time-box"><div class="time-number" id="remHoursNum">--</div><div class="time-unit">HOURS</div></div>
+  <div class="time-box"><div class="time-number" id="remMinutesNum">--</div><div class="time-unit">MINUTES</div></div>
+  <div class="time-box"><div class="time-number" id="remSecondsNum">--</div><div class="time-unit">SECONDS</div></div>
+</div>
+  <div class="next-birthday-detail" id="nextBirthdayDesc">Birthday countdown active </div>
+    
+    
+<div class="control-panel">
+  <button class="btn-icon btn-ring" id="playRingtoneBtn">Play Ringtone</button>
+  <button class="btn-icon btn-stop" id="stopRingtoneBtn">Remove/Stop Ringtone</button>
+  <button class="btn-icon btn-stop" id="stopCounterBtn">Stop Big Counter</button>
+  <button class="btn-icon btn-secret" id="openMiniCounterBtn">Open Mini Counter</button>
+</div>
+</div>
+
+<div class="age-container" id="ageStatsPanel">
+  <div class="age-chip"><div class="age-chip-label">YEARS</div><div class="age-chip-value" id="ageYearsVal">—</div></div>
+  <div class="age-chip"><div class="age-chip-label">MONTHS</div><div class="age-chip-value" id="ageMonthsVal">—</div></div>
+  <div class="age-chip"><div class="age-chip-label">DAYS (lived)</div><div class="age-chip-value" id="ageDaysVal">—</div></div>
+</div>
+
+<div id="setupContainer" class="setup-section">
+  <div class="setup-title">WELCOME — SET YOUR BIRTHDAY ONCE, FOREVER</div>
+  <input type="date" id="birthdayInputSetup" class="setup-input" value="2000-07-20">
+  <button id="saveBirthdayBtn" class="setup-btn">SAVE BIRTHDAY — START ETERNAL TIMER</button>
+  <div class="reset-link"><button id="resetBirthdayBtn" class="reset-btn">⟳ RESET & RE-ENTER BIRTHDAY</button></div>
+</div>
+
+
+</div>
+</div>
+
+<!-- Mini Counter Modal -->
+<div id="miniModal" class="modal-overlay">
+  <div class="mini-counter-modal">
+  <div class="mini-title">SECRET MINI COUNTER</div>
+  <input type="password" id="modalPassword" class="password-input" placeholder="Enter Password" autocomplete="off">
+  <button id="unlockMiniBtn" class="setup-btn" style="margin-bottom: 1rem;">UNLOCK</button>
+  <div id="miniContent" style="display: none;">
+  <div class="mini-title" style="font-size: 1.2rem;">MINI BIRTHDAY COUNTER</div>
+<div class="mini-timer-grid">
+<div class="mini-time-box"><div class="mini-time-number" id="miniDays">--</div><div class="mini-time-unit">DAYS</div></div>
+<div class="mini-time-box"><div class="mini-time-number" id="miniHours">--</div><div class="mini-time-unit">HOURS</div></div>
+<div class="mini-time-box"><div class="mini-time-number" id="miniMinutes">--</div><div class="mini-time-unit">MINUTES</div></div>
+<div class="mini-time-box"><div class="mini-time-number" id="miniSeconds">--</div><div class="mini-time-unit">SECONDS</div></div>
+</div>
+
+</div>
+  <button class="close-modal-btn" id="closeModalBtn">CLOSE</button>
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  //   CUSTOM RINGTONE SYSTEM WITH UPLOAD/REMOVE + LOCALSTORAGE
+  //   PERSISTS AFTER REFRESH
+  // ============================================================
+  
+  let customRingtoneData = null;
+  let customRingtoneBlobUrl = null;
+  let audioUnlocked = false;
+  
+  // Audio context for default melody
+  let audioContext = null;
+  let currentOscillators = [];
+  let activeGains = [];
+  let ringtonePlayedThisBirthday = false;
+  
+  function unlockAudioOnInteraction() {
+    if (audioUnlocked) return;
+    const unlock = () => {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      if (ctx.state === 'suspended') {
+        ctx.resume().then(() => {
+          audioUnlocked = true;
+          ctx.close();
+        }).catch(e => console.log('Audio unlock failed:', e));
+      } else {
+        audioUnlocked = true;
+        ctx.close();
+      }
+      document.removeEventListener('click', unlock);
+      document.removeEventListener('touchstart', unlock);
+      document.removeEventListener('keydown', unlock);
+    };
+    document.addEventListener('click', unlock);
+    document.addEventListener('touchstart', unlock);
+    document.addEventListener('keydown', unlock);
+  }
+  
+  unlockAudioOnInteraction();
+  
+  // Load custom ringtone from localStorage
+  function loadCustomRingtoneFromStorage() {
+    const stored = localStorage.getItem('my_custom_ringtone');
+    if (stored) {
+      try {
+        const obj = JSON.parse(stored);
+        if (obj && obj.dataUrl && obj.mimeType) {
+          customRingtoneData = obj;
+          if (customRingtoneBlobUrl) URL.revokeObjectURL(customRingtoneBlobUrl);
+          
+          fetch(obj.dataUrl)
+            .then(res => res.blob())
+            .then(blob => {
+              customRingtoneBlobUrl = URL.createObjectURL(blob);
+              const fileExt = obj.mimeType.split('/')[1].toUpperCase();
+              document.getElementById('ringStatusText').innerHTML = `🎧 Custom ringtone active ✅ (${fileExt})`;
+            })
+            .catch(err => {
+              console.error("Failed to load ringtone blob:", err);
+              document.getElementById('ringStatusText').innerHTML = `🔔 Default melody`;
+            });
+          return true;
+        }
+      } catch(e) { console.warn("Failed load ringtone", e); }
+    }
+    customRingtoneData = null;
+    if (customRingtoneBlobUrl) {
+      URL.revokeObjectURL(customRingtoneBlobUrl);
+      customRingtoneBlobUrl = null;
+    }
+    document.getElementById('ringStatusText').innerHTML = `🔔 Default birthday melody`;
+    return false;
+  }
+  
+  // Save custom ringtone to localStorage
+  function saveCustomRingtoneToStorage(dataUrl, mimeType, fileName) {
+    const obj = { dataUrl, mimeType, fileName };
+    localStorage.setItem('my_custom_ringtone', JSON.stringify(obj));
+    customRingtoneData = obj;
+    
+    if (customRingtoneBlobUrl) URL.revokeObjectURL(customRingtoneBlobUrl);
+    
+    fetch(dataUrl)
+      .then(res => res.blob())
+      .then(blob => {
+        customRingtoneBlobUrl = URL.createObjectURL(blob);
+        document.getElementById('ringStatusText').innerHTML = `🎧 Custom ringtone saved ✅ - "${fileName}"`;
+      })
+      .catch(err => {
+        console.error("Failed to create blob URL:", err);
+      });
+  }
+  
+  // Remove custom ringtone
+  function removeCustomRingtone() {
+    localStorage.removeItem('my_custom_ringtone');
+    customRingtoneData = null;
+    if (customRingtoneBlobUrl) {
+      URL.revokeObjectURL(customRingtoneBlobUrl);
+      customRingtoneBlobUrl = null;
+    }
+    document.getElementById('ringStatusText').innerHTML = `🔔 Default melody (custom removed)`;
+    alert("✓ Custom ringtone removed. Default melody will play now.");
+  }
+  
+  // Test custom ringtone
+  function testCustomRingtone() {
+    if (customRingtoneBlobUrl) {
+      const testAudio = new Audio(customRingtoneBlobUrl);
+      testAudio.volume = 0.7;
+      testAudio.play()
+        .then(() => {
+          setTimeout(() => {
+            testAudio.pause();
+            testAudio.currentTime = 0;
+          }, 5000);
+        })
+        .catch(err => {
+          alert("⚠️ Click anywhere on the page first to enable audio, then try again.");
+        });
+    } else if (customRingtoneData) {
+      alert("Ringtone is saved but not loaded. Try uploading again.");
+    } else {
+      alert("No custom ringtone uploaded. Upload an MP3, WAV, or OGG file first.");
+    }
+  }
+  
+  // Play custom ringtone (HTMLAudioElement)
+  function playCustomRingtoneAsync() {
+    return new Promise((resolve) => {
+      if (!customRingtoneBlobUrl) { resolve(false); return; }
+      try {
+        const audio = new Audio(customRingtoneBlobUrl);
+        audio.volume = 0.6;
+        audio.loop = false;
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            audio.onended = () => resolve(true);
+            resolve(true);
+          }).catch(err => { resolve(false); });
+        } else { resolve(false); }
+      } catch(e) { resolve(false); }
+    });
+  }
+  
+  // Default birthday melody (Web Audio)
+  function playDefaultMelody() {
+    stopRingtone();
+    try {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      const playMelody = () => {
+        if (!audioContext) return;
+        const now = audioContext.currentTime;
+        const melody = [
+          { freq: 261.63, duration: 0.4 }, { freq: 261.63, duration: 0.4 }, { freq: 293.66, duration: 0.5 },
+          { freq: 261.63, duration: 0.5 }, { freq: 349.23, duration: 0.5 }, { freq: 329.63, duration: 0.8 },
+          { freq: 261.63, duration: 0.4 }, { freq: 261.63, duration: 0.4 }, { freq: 293.66, duration: 0.5 },
+          { freq: 261.63, duration: 0.5 }, { freq: 392.00, duration: 0.5 }, { freq: 349.23, duration: 0.8 },
+          { freq: 261.63, duration: 0.4 }, { freq: 261.63, duration: 0.4 }, { freq: 523.25, duration: 0.5 },
+          { freq: 440.00, duration: 0.5 }, { freq: 349.23, duration: 0.5 }, { freq: 329.63, duration: 0.5 },
+          { freq: 293.66, duration: 0.8 }
+        ];
+        let time = now;
+        melody.forEach(note => {
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.connect(gain);
+          gain.connect(audioContext.destination);
+          osc.frequency.value = note.freq;
+          gain.gain.value = 0.2;
+          osc.start(time);
+          gain.gain.exponentialRampToValueAtTime(0.00001, time + note.duration);
+          osc.stop(time + note.duration);
+          currentOscillators.push(osc);
+          activeGains.push(gain);
+          time += note.duration;
+        });
+      };
+      if (audioContext.state === 'suspended') {
+        audioContext.resume().then(playMelody);
+      } else {
+        playMelody();
+      }
+    } catch(e) { console.warn("Ringtone error"); }
+  }
+  
+  // Main ringtone function - tries custom first, then default
+  async function playBirthdayRingtone() {
+    if (customRingtoneData && customRingtoneBlobUrl) {
+      const played = await playCustomRingtoneAsync();
+      if (!played) {
+        playDefaultMelody();
+      }
+    } else {
+      playDefaultMelody();
+    }
+  }
+  
+  function stopRingtone() {
+    currentOscillators.forEach(osc => { try { osc.stop(); } catch(e) {} });
+    activeGains.forEach(gain => { try { gain.gain.value = 0; } catch(e) {} });
+    currentOscillators = [];
+    activeGains = [];
+  }
+  
+  // ---------- BIRTHDAY LOGIC ----------
+  let storedBirthDate = null;
+  let isBigCounterStopped = false;
+  let stoppedRemainingSeconds = null;
+  let mainInterval = null;
+  let clockInterval = null;
+  let miniInterval = null;
+  
+  // Mini counter independent data
+  let miniRemainingSeconds = 0;
+  let miniNextBirthdayTimestamp = null;
+  
+  // DOM Elements
+  const liveClockSpan = document.getElementById('liveClockDisplay');
+  const todayWeekdaySpan = document.getElementById('todayWeekday');
+  const todayFullDateSpan = document.getElementById('todayFullDate');
+  const storedBadgeDiv = document.getElementById('storedBadgeArea');
+  const storedBirthdayTextSpan = document.getElementById('storedBirthdayText');
+  const remDaysSpan = document.getElementById('remDaysNum');
+  const remHoursSpan = document.getElementById('remHoursNum');
+  const remMinutesSpan = document.getElementById('remMinutesNum');
+  const remSecondsSpan = document.getElementById('remSecondsNum');
+  const nextBirthdayDescSpan = document.getElementById('nextBirthdayDesc');
+  const ageYearsSpan = document.getElementById('ageYearsVal');
+  const ageMonthsSpan = document.getElementById('ageMonthsVal');
+  const ageDaysSpan = document.getElementById('ageDaysVal');
+  const setupContainer = document.getElementById('setupContainer');
+  const birthdayInput = document.getElementById('birthdayInputSetup');
+  const saveBtn = document.getElementById('saveBirthdayBtn');
+  const resetBtn = document.getElementById('resetBirthdayBtn');
+  const playRingtoneBtn = document.getElementById('playRingtoneBtn');
+  const stopRingtoneBtn = document.getElementById('stopRingtoneBtn');
+  const stopCounterBtn = document.getElementById('stopCounterBtn');
+  const openMiniBtn = document.getElementById('openMiniCounterBtn');
+  const modal = document.getElementById('miniModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const unlockBtn = document.getElementById('unlockMiniBtn');
+  const modalPassword = document.getElementById('modalPassword');
+  const miniContent = document.getElementById('miniContent');
+  
+  // Helper functions
+  function getDayName(date) {
+    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return weekdays[date.getDay()];
+  }
+  
+  function getNextBirthday(birthDate, referenceDate) {
+    if (!birthDate) return null;
+    const birthMonth = birthDate.getMonth();
+    const birthDay = birthDate.getDate();
+    let next = new Date(referenceDate.getFullYear(), birthMonth, birthDay);
+    if (next <= referenceDate) {
+      next = new Date(referenceDate.getFullYear() + 1, birthMonth, birthDay);
+    }
+    return next;
+  }
+  
+  function getRemainingSeconds(birthDate, now) {
+    if (!birthDate) return 0;
+    const nextBDay = getNextBirthday(birthDate, now);
+    if (!nextBDay) return 0;
+    let diffMs = nextBDay - now;
+    const isBirthday = (now.getMonth() === birthDate.getMonth() && now.getDate() === birthDate.getDate());
+    if (isBirthday && diffMs <= 0) {
+      const futureNext = new Date(now.getFullYear() + 1, birthDate.getMonth(), birthDate.getDate());
+      diffMs = futureNext - now;
+    }
+    return Math.max(0, Math.floor(diffMs / 1000));
+  }
+  
+  function computeAge(birth, today) {
+    let years = today.getFullYear() - birth.getFullYear();
+    let months = today.getMonth() - birth.getMonth();
+    let days = today.getDate() - birth.getDate();
+    if (days < 0) {
+      const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+      days += lastMonth.getDate();
+      months--;
+    }
+    if (months < 0) { months += 12; years--; }
+    if (years < 0) return { years: 0, months: 0, days: 0 };
+    return { years, months, days };
+  }
+  
+  // Update BIG counter (can be stopped/frozen)
+  function updateBigCounter() {
+    if (!storedBirthDate) return;
+    const now = new Date();
+    const age = computeAge(storedBirthDate, now);
+    ageYearsSpan.innerText = age.years;
+    ageMonthsSpan.innerText = age.months;
+    ageDaysSpan.innerText = age.days;
+    
+    let remainingSec;
+    if (isBigCounterStopped && stoppedRemainingSeconds !== null) {
+      remainingSec = stoppedRemainingSeconds;
+    } else {
+      remainingSec = getRemainingSeconds(storedBirthDate, now);
+      if (!isBigCounterStopped) {
+        stoppedRemainingSeconds = remainingSec;
+      }
+    }
+    
+    const days = Math.floor(remainingSec / 86400);
+    const hours = Math.floor((remainingSec % 86400) / 3600);
+    const minutes = Math.floor((remainingSec % 3600) / 60);
+    const seconds = remainingSec % 60;
+    
+    remDaysSpan.innerText = days;
+    remHoursSpan.innerText = hours.toString().padStart(2, '0');
+    remMinutesSpan.innerText = minutes.toString().padStart(2, '0');
+    remSecondsSpan.innerText = seconds.toString().padStart(2, '0');
+    
+    // Check for ringtone trigger (only when counter naturally reaches zero on birthday)
+    const isBirthdayToday = (now.getMonth() === storedBirthDate.getMonth() && now.getDate() === storedBirthDate.getDate());
+    if (!isBigCounterStopped && isBirthdayToday && remainingSec === 0 && !ringtonePlayedThisBirthday) {
+      playBirthdayRingtone();
+      ringtonePlayedThisBirthday = true;
+      const cdArea = document.getElementById('countdownLiveArea');
+      if (cdArea) cdArea.classList.add('ringtone-active');
+      nextBirthdayDescSpan.innerHTML = `🎉 HAPPY BIRTHDAY! RINGTONE PLAYING! 🎉`;
+      setTimeout(() => {
+        if (cdArea) cdArea.classList.remove('ringtone-active');
+      }, 8000);
+    }
+    
+    const nextBDay = getNextBirthday(storedBirthDate, now);
+    if (nextBDay && !isBirthdayToday) {
+      const weekdayName = getDayName(nextBDay);
+      const formattedDate = nextBDay.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      nextBirthdayDescSpan.innerHTML = `Inshallah Next birthday On: ${weekdayName}, ${formattedDate}`;
+    } else if (isBirthdayToday && !ringtonePlayedThisBirthday) {
+      nextBirthdayDescSpan.innerHTML = `🎂 TODAY IS YOUR BIRTHDAY! 🎂`;
+    }
+  }
+
+  function updateMiniCounter() {
+    if (!storedBirthDate) return;
+    const now = new Date();
+    const remainingSec = getRemainingSeconds(storedBirthDate, now);
+    const days = Math.floor(remainingSec / 86400);
+    const hours = Math.floor((remainingSec % 86400) / 3600);
+    const minutes = Math.floor((remainingSec % 3600) / 60);
+    const seconds = remainingSec % 60;
+    
+    const miniDaysSpan = document.getElementById('miniDays');
+    const miniHoursSpan = document.getElementById('miniHours');
+    const miniMinutesSpan = document.getElementById('miniMinutes');
+    const miniSecondsSpan = document.getElementById('miniSeconds');
+    const miniDescSpan = document.getElementById('miniDesc');
+    
+    if (miniDaysSpan) miniDaysSpan.innerText = days;
+    if (miniHoursSpan) miniHoursSpan.innerText = hours.toString().padStart(2, '0');
+    if (miniMinutesSpan) miniMinutesSpan.innerText = minutes.toString().padStart(2, '0');
+    if (miniSecondsSpan) miniSecondsSpan.innerText = seconds.toString().padStart(2, '0');
+    
+    const nextBDay = getNextBirthday(storedBirthDate, now);
+    const isBirthday = (now.getMonth() === storedBirthDate.getMonth() && now.getDate() === storedBirthDate.getDate());
+    if (nextBDay && miniDescSpan) {
+      if (isBirthday && remainingSec === 0) {
+        miniDescSpan.innerHTML = `🎉 BIRTHDAY TODAY! Mini counter celebrating! 🎉`;
+      } else {
+        const weekday = getDayName(nextBDay);
+        miniDescSpan.innerHTML = `Mini counter | Next: ${weekday}, ${nextBDay.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+      }
+    }
+  }
+
+  function updateRealtimeClock() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const mins = now.getMinutes().toString().padStart(2, '0');
+    const secs = now.getSeconds().toString().padStart(2, '0');
+    if (liveClockSpan) liveClockSpan.innerText = `${hours}:${mins}:${secs}`;
+    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    if (todayWeekdaySpan) todayWeekdaySpan.innerText = weekdays[now.getDay()];
+    const monthsNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    if (todayFullDateSpan) todayFullDateSpan.innerText = `${monthsNames[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+  }
+  
+  // Stop big counter (freeze)
+  function stopBigCounter() {
+    if (!storedBirthDate) {
+      alert("Set birthday first!");
+      return;
+    }
+    if (!isBigCounterStopped) {
+      const now = new Date();
+      stoppedRemainingSeconds = getRemainingSeconds(storedBirthDate, now);
+      isBigCounterStopped = true;
+      alert("Big counter stopped! Mini counter continues running.");
+    } else {
+      alert("Big counter is already stopped. Press RESUME? (refresh to resume) — use reset to re-enable");
+    }
+  }
+  
+  // Password-checked mini modal
+  function openModal() {
+    modal.classList.add('active');
+    modalPassword.value = '';
+    miniContent.style.display = 'none';
+  }
+  
+  function closeModal() {
+    modal.classList.remove('active');
+  }
+  
+  function checkPasswordAndShow() {
+    const password = modalPassword.value;
+    if (password === "3211") {
+      miniContent.style.display = 'block';
+      updateMiniCounter();
+      if (!miniInterval) {
+        miniInterval = setInterval(() => { if (storedBirthDate) updateMiniCounter(); }, 1000);
+      }
+    } else {
+      alert("Wrong password! Access denied.");
+    }
+  }
+  
+  // localStorage functions for birthday
+  function persistBirthday(dateObj) {
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    localStorage.setItem('eternal_birthday', `${year}-${month}-${day}`);
+  }
+  
+  function loadStoredBirthday() {
+    const stored = localStorage.getItem('eternal_birthday');
+    if (!stored) return null;
+    const [year, month, day] = stored.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  }
+  
+  function clearStoredBirthday() {
+    localStorage.removeItem('eternal_birthday');
+    storedBirthDate = null;
+    isBigCounterStopped = false;
+    ringtonePlayedThisBirthday = false;
+    setupContainer.style.display = 'block';
+    storedBadgeDiv.style.display = 'none';
+    remDaysSpan.innerText = '--';
+    remHoursSpan.innerText = '--';
+    remMinutesSpan.innerText = '--';
+    remSecondsSpan.innerText = '--';
+    nextBirthdayDescSpan.innerHTML = 'Set your birthday to start eternal timer ✨';
+    ageYearsSpan.innerText = '—';
+    ageMonthsSpan.innerText = '—';
+    ageDaysSpan.innerText = '—';
+  }
+  
+  function updateUIVisibility() {
+    if (!storedBirthDate) {
+      setupContainer.style.display = 'block';
+      storedBadgeDiv.style.display = 'none';
+    } else {
+      setupContainer.style.display = 'none';
+      storedBadgeDiv.style.display = 'block';
+      const formatted = storedBirthDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      storedBirthdayTextSpan.innerText = formatted;
+    }
+  }
+  
+  function setBirthdayAndSave(dateString) {
+    const [year, month, day] = dateString.split('-').map(Number);
+    const birthObj = new Date(year, month - 1, day);
+    if (isNaN(birthObj.getTime())) { alert("Invalid date"); return false; }
+    storedBirthDate = birthObj;
+    persistBirthday(storedBirthDate);
+    isBigCounterStopped = false;
+    ringtonePlayedThisBirthday = false;
+    updateUIVisibility();
+    updateBigCounter();
+    return true;
+  }
+  
+  function resetBirthday() {
+    if (confirm("Reset stored birthday?")) {
+      clearStoredBirthday();
+      storedBirthDate = null;
+      updateUIVisibility();
+      if (birthdayInput) birthdayInput.value = "2000-01-01";
+    }
+  }
+  
+  function startIntervals() {
+    if (mainInterval) clearInterval(mainInterval);
+    if (clockInterval) clearInterval(clockInterval);
+    updateRealtimeClock();
+    if (storedBirthDate) updateBigCounter();
+    clockInterval = setInterval(updateRealtimeClock, 1000);
+    mainInterval = setInterval(() => { if (storedBirthDate) updateBigCounter(); }, 1000);
+  }
+  
+  // Setup ringtone UI
+  function initRingtoneUI() {
+    const uploadBtn = document.getElementById('uploadRingBtn');
+    const fileInput = document.getElementById('ringtoneUploadInput');
+    const removeBtn = document.getElementById('removeRingBtn');
+    const testBtn = document.getElementById('testRingBtn');
+    
+    uploadBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const dataUrl = ev.target.result;
+        saveCustomRingtoneToStorage(dataUrl, file.type, file.name);
+        alert(`✅ Custom ringtone "${file.name}" saved to localStorage!\n\nIt will persist after page refresh.\nClick "Test Ringtone" to hear it.`);
+      };
+      reader.readAsDataURL(file);
+    });
+    removeBtn.addEventListener('click', () => { removeCustomRingtone(); });
+    testBtn.addEventListener('click', () => { testCustomRingtone(); });
+    loadCustomRingtoneFromStorage();
+  }
+  
+  function init() {
+    initRingtoneUI();
+    
+    const loaded = loadStoredBirthday();
+    if (loaded) {
+      storedBirthDate = loaded;
+      updateUIVisibility();
+      startIntervals();
+      updateBigCounter();
+    } else {
+      storedBirthDate = null;
+      updateUIVisibility();
+      startIntervals();
+    }
+    
+    saveBtn.addEventListener('click', () => {
+      if (birthdayInput.value && setBirthdayAndSave(birthdayInput.value)) updateBigCounter();
+    });
+    resetBtn.addEventListener('click', resetBirthday);
+    playRingtoneBtn.addEventListener('click', () => playBirthdayRingtone());
+    stopRingtoneBtn.addEventListener('click', () => stopRingtone());
+    stopCounterBtn.addEventListener('click', stopBigCounter);
+    openMiniBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    unlockBtn.addEventListener('click', checkPasswordAndShow);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  }
+  
+  init();
+</script>
+</body>
+</html>
