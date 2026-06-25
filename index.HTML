@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>SHAHIRYAR ABRO</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cambria Math', 'Segoe UI', system-ui, sans-serif;
+}
+body{
+  min-height: 100vh;
+  background: linear-gradient(145deg, #0a0f1f 0%, #121b2f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  padding: 20px;
+  position: relative;
+}
+body::before{
+  content: '';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 180, 70, 0.08), transparent 70%);
+  pointer-events: none;
+}
+.eternal-card{
+  max-width: 860px;
+  width: 100%;
+  background: rgba(12, 20, 35, 0.75);
+  backdrop-filter: blur(20px);
+  border-radius: 2px;
+  box-shadow: 0 30px 55px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 150, 0.2);
+  padding: 2rem 2rem 2.2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+.live-header{
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: 1rem 1.8rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 2px solid rgba(255, 200, 100, 0.3);
+}
+.digital-clock{
+  font-size: 2.3rem;
+  font-weight: 800;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, #FFE6B0, #FFAE42);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 3px;
+}
+.date-stack{
+  text-align: right;
+}
+.weekday-big{
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFD966;
+}
+.full-date-text{
+  font-size: 0.8rem;
+  color: #aab7d4;
+}
+.stored-badge{
+  background: rgba(255, 175, 75, 0.18);
+  border-radius: 2px;
+  padding: 0.6rem 1.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 200, 100, 0.4);
+}
+.stored-label{
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #FFBC6E;
+}
+.stored-value{
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #FFDFA5;
+  margin-top: 4px;
+}
+.countdown-titan{
+  background: linear-gradient(125deg, rgba(0, 0, 0, 0.6), rgba(20, 30, 55, 0.8));
+  border-radius: 2px;
+  padding: 1.8rem 1.2rem;
+  margin: 1.2rem 0 1.5rem;
+  border: 1px solid rgba(255, 180, 80, 0.6);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+.countdown-title{
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: #FFD966;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.timer-grid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 1rem 0;
+}
+.time-box{
+  background: rgba(0, 0, 0, 0.65);
+  min-width: 95px;
+  text-align: center;
+  padding: 1.2rem 0.5rem;
+  border-radius: 40px;
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s;
+}
+.time-number{
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFE6B0, #FFB347);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-feature-settings: "tnum";
+  line-height: 1;
+}
+.time-unit{
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #B9CAF0;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+}
+.next-birthday-detail{
+  background: rgba(255, 190, 80, 0.12);
+  border-radius: 2px;
+  padding: 10px 16px;
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 500;
+  color: #FFE0A0;
+  font-size: 0.9rem;
+}
+.age-container{
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.age-chip{
+  background: rgba(0, 0, 0, 0.45);
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 32px;
+}
+.age-chip-label{
+  font-size: 0.7rem;
+  color: #89A0D4;
+}
+.age-chip-value{
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #FFD38B;
+}
+.setup-section{
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  padding: 1.4rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s;
+}
+.setup-title{
+  color: #FFD966;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.setup-input{
+  width: 100%;
+  padding: 1rem;
+  border-radius: 2px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.setup-btn{
+  background: linear-gradient(105deg, #F5A623, #E07C1F);
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 2px;
+  font-weight: 800;
+  color: #1a1f2e;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.reset-link{
+  text-align: center;
+  margin-top: 18px;
+}
+.reset-btn{
+  background: none;
+  border: 1px solid rgba(255, 170, 80, 0.5);
+  padding: 6px 18px;
+  border-radius: 2px;
+  color: #FFBC6E;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: 0.2s;
+}
+.control-panel{
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: 1rem 1.2rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.btn-icon{
+  background: linear-gradient(105deg, #2c3e66, #1a2a4f);
+  border: none;
+  padding: 8px 20px;
+  border-radius: 2px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: 0.2s;
+}
+.btn-icon:hover{
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+.btn-ring{
+  background: linear-gradient(105deg, #FF8C42, #FF6B2C);
+}
+.btn-stop{
+  background: linear-gradient(105deg, #e74c3c, #c0392b);
+}
+.btn-secret{
+  background: linear-gradient(105deg, #8e44ad, #6c3483);
+}
+/* PERMANENT RINGTONE UPLOAD AREA */
+.ringtone-custom-area{
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: 1rem;
+  margin-top: 12px;
+  border-left: 3px solid #FFAE42;
+}
+.ringtone-label{
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #FFD9A5;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 8px;
+}
+.file-upload-label{
+  background: linear-gradient(105deg, #2c3e66, #1a2a4f);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: inline-block;
+  color: white;
+  font-weight: 600;
+  margin-right: 10px;
+  margin-bottom: 8px;
+}
+.file-upload-label:hover{
+  filter: brightness(1.1);
+}
+#customRingtoneInput{
+  display: none;
+}
+.ringtone-action-btn{
+  background: rgba(255, 175, 75, 0.25);
+  border: 1px solid #FFAE42;
+  color: #FFD966;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  margin: 5px 5px 0 0;
+  transition: 0.2s;
+}
+.ringtone-action-btn:hover{
+  background: #FFAE42;
+  color: #1a1f2e;
+}
+.remove-custom-btn{
+  background: rgba(231, 76, 60, 0.7);
+  border-color: #e74c3c;
+  color: #ffc5c5;
+}
+.remove-custom-btn:hover{
+  background: #e74c3c;
+  color: white;
+}
+.ringtone-status{
+  font-size: 0.65rem;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: #FFBC6E;
+  margin-top: 10px;
+  text-align: center;
+  word-break: break-all;
+}
+.custom-ringtone-info{
+  font-size: 0.7rem;
+  color: #FFD966;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.storage-info{
+  font-size: 0.6rem;
+  color: #FFAE42;
+  margin-top: 5px;
+  text-align: center;
+}
+/* modal styles */
+.modal-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.modal-overlay.active{
+  opacity: 1;
+  visibility: visible;
+}
+.mini-counter-modal{
+  background: linear-gradient(145deg, #1a1f2e, #0f1420);
+  border-radius: 2px;
+  max-width: 500px;
+  width: 90%;
+  padding: 2rem;
+  border: 2px solid rgba(255, 180, 80, 0.5);
+  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+}
+.mini-title{
+  color: #FFD966;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.password-input{
+  width: 100%;
+  padding: 1rem;
+  border-radius: 2px;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.mini-timer-grid{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+}
+.mini-time-box{
+  background: rgba(0, 0, 0, 0.6);
+  min-width: 70px;
+  text-align: center;
+  padding: 1rem 0.3rem;
+  border-radius: 32px;
+}
+.mini-time-number{
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFE6B0, #FFB347);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.mini-time-unit{
+  font-size: 0.6rem;
+  color: #B9CAF0;
+}
+.close-modal-btn{
+  background: linear-gradient(105deg, #e74c3c, #c0392b);
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 2px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.ringtone-active{
+  animation: pulse-glow 0.8s ease-in-out infinite;
+}
+@keyframes pulse-glow{
+  0%, 100% { text-shadow: 0 0 5px #FFAE42; }
+  50% { text-shadow: 0 0 20px #FF6B2C; }
+}
+@media (max-width: 600px){
+  .eternal-card{ padding: 1.5rem; }
+  .time-number{ font-size: 1.8rem; }
+  .time-box{ min-width: 70px; }
+}
+</style>
+</head>
+<body>
+
+<div class="eternal-card" id="mainApp">
+<div class="live-header">
+  <div class="digital-clock" id="liveClockDisplay">--:--:--</div>
+  <div class="date-stack">
+  <div class="weekday-big" id="todayWeekday">—</div>
+  <div class="full-date-text" id="todayFullDate">—</div>
+</div>
+</div>
+
+<div class="stored-badge" id="storedBadgeArea" style="display: none;">
+  <div class="stored-value" id="storedBirthdayText">—</div>
+</div>
+
+<div class="countdown-titan" id="countdownLiveArea">
+  <div class="countdown-title">REAL TIME COUNTDOWN</div>
+<div class="timer-grid">
+  <div class="time-box"><div class="time-number" id="remDaysNum">--</div><div class="time-unit">DAYS</div></div>
+  <div class="time-box"><div class="time-number" id="remHoursNum">--</div><div class="time-unit">HOURS</div></div>
+  <div class="time-box"><div class="time-number" id="remMinutesNum">--</div><div class="time-unit">MINUTES</div></div>
+  <div class="time-box"><div class="time-number" id="remSecondsNum">--</div><div class="time-unit">SECONDS</div></div>
+</div>
+  <div class="next-birthday-detail" id="nextBirthdayDesc">Birthday countdown active </div>
+    
+  <!-- PERMANENT RINGTONE UPLOAD - SAVES FOREVER IN LOCALSTORAGE -->
+  <div class="ringtone-custom-area">
+    <div class="ringtone-label">🎵 MY PERMANENT RINGTONE (SAVED FOREVER)</div>
+    <label class="file-upload-label" for="customRingtoneInput">📁 UPLOAD & SAVE MY RINGTONE</label>
+    <input type="file" id="customRingtoneInput" accept="audio/*">
+    <div class="custom-ringtone-info">
+      <button id="previewCustomRingtoneBtn" class="ringtone-action-btn">▶ Preview My Ringtone</button>
+      <button id="removeCustomRingtoneBtn" class="ringtone-action-btn remove-custom-btn">🗑 DELETE (Clear Storage)</button>
+    </div>
+    <div id="customRingtoneStatus" class="ringtone-status">💾 Loading saved ringtone...</div>
+    <div class="storage-info">💡 Ringtone is saved in your browser's local storage and will persist after refresh!</div>
+  </div>
+
+<div class="control-panel">
+  <button class="btn-icon btn-ring" id="playCustomRingtoneBtn">▶ Play My Ringtone</button>
+  <button class="btn-icon btn-stop" id="stopRingtoneBtn">⏹ Stop Sound</button>
+  <button class="btn-icon btn-stop" id="stopCounterBtn">⏸ Stop Big Counter</button>
+  <button class="btn-icon btn-secret" id="openMiniCounterBtn">🔓 Open Mini Counter</button>
+</div>
+</div>
+
+<div class="age-container" id="ageStatsPanel">
+  <div class="age-chip"><div class="age-chip-label">YEARS</div><div class="age-chip-value" id="ageYearsVal">—</div></div>
+  <div class="age-chip"><div class="age-chip-label">MONTHS</div><div class="age-chip-value" id="ageMonthsVal">—</div></div>
+  <div class="age-chip"><div class="age-chip-label">DAYS (lived)</div><div class="age-chip-value" id="ageDaysVal">—</div></div>
+</div>
+
+<div id="setupContainer" class="setup-section">
+  <div class="setup-title">WELCOME — SET YOUR BIRTHDAY ONCE, FOREVER</div>
+  <input type="date" id="birthdayInputSetup" class="setup-input" value="2000-07-20">
+  <button id="saveBirthdayBtn" class="setup-btn">SAVE BIRTHDAY — START ETERNAL TIMER</button>
+  <div class="reset-link"><button id="resetBirthdayBtn" class="reset-btn">⟳ RESET & RE-ENTER BIRTHDAY</button></div>
+</div>
+
+</div>
+</div>
+
+<!-- Mini Counter Modal -->
+<div id="miniModal" class="modal-overlay">
+  <div class="mini-counter-modal">
+  <div class="mini-title">SECRET MINI COUNTER</div>
+  <input type="password" id="modalPassword" class="password-input" placeholder="Enter Password" autocomplete="off">
+  <button id="unlockMiniBtn" class="setup-btn" style="margin-bottom: 1rem;">UNLOCK</button>
+  <div id="miniContent" style="display: none;">
+  <div class="mini-title" style="font-size: 1.2rem;">MINI BIRTHDAY COUNTER</div>
+<div class="mini-timer-grid">
+<div class="mini-time-box"><div class="mini-time-number" id="miniDays">--</div><div class="mini-time-unit">DAYS</div></div>
+<div class="mini-time-box"><div class="mini-time-number" id="miniHours">--</div><div class="mini-time-unit">HOURS</div></div>
+<div class="mini-time-box"><div class="mini-time-number" id="miniMinutes">--</div><div class="mini-time-unit">MINUTES</div></div>
+<div class="mini-time-box"><div class="mini-time-number" id="miniSeconds">--</div><div class="mini-time-unit">SECONDS</div></div>
+</div>
+<div class="next-birthday-detail" id="miniDesc" style="font-size: 0.8rem;">Mini counter running independently</div>
+</div>
+  <button class="close-modal-btn" id="closeModalBtn">CLOSE</button>
+  </div>
+</div>
+
+<script>
+  // ========== PERMANENT RINGTONE SYSTEM (STORED INDEFINITELY IN LOCALSTORAGE) ==========
+  let audioContext = null;
+  let currentAudioBuffer = null;
+  let currentSourceNode = null;
+  let ringtonePlayedThisBirthday = false;
+  let ringtoneLoaded = false;
+  
+  // DOM elements
+  const customFileInput = document.getElementById('customRingtoneInput');
+  const previewCustomBtn = document.getElementById('previewCustomRingtoneBtn');
+  const removeCustomBtn = document.getElementById('removeCustomRingtoneBtn');
+  const playCustomBtn = document.getElementById('playCustomRingtoneBtn');
+  const stopRingtoneBtn = document.getElementById('stopRingtoneBtn');
+  const ringtoneStatusSpan = document.getElementById('customRingtoneStatus');
+  
+  // LOCALSTORAGE KEYS (PERMANENT STORAGE)
+  const STORED_CUSTOM_RINGTONE_KEY = 'my_ringtone_permanent_base64';
+  const STORED_RINGTONE_NAME_KEY = 'my_ringtone_permanent_name';
+  
+  // Stop any playing audio
+  function stopAllAudio() {
+    if (currentSourceNode) {
+      try { currentSourceNode.stop(); } catch(e) {}
+      currentSourceNode = null;
+    }
+  }
+  
+  // Load permanent ringtone from localStorage on every page load
+  async function loadPermanentRingtoneFromStorage() {
+    const storedBase64 = localStorage.getItem(STORED_CUSTOM_RINGTONE_KEY);
+    const storedName = localStorage.getItem(STORED_RINGTONE_NAME_KEY);
+    
+    if (storedBase64) {
+      ringtoneStatusSpan.innerHTML = `🔄 Loading your saved ringtone "${storedName || 'Your Ringtone'}" from permanent storage...`;
+      
+      try {
+        // Convert base64 to ArrayBuffer
+        const binaryString = atob(storedBase64);
+        const bytes = new Uint8Array(binaryString.length);
+        for (let i = 0; i < binaryString.length; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+        const arrayBuffer = bytes.buffer;
+        
+        if (!audioContext) {
+          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        
+        // Decode audio data
+        return new Promise((resolve) => {
+          audioContext.decodeAudioData(arrayBuffer, (buffer) => {
+            currentAudioBuffer = buffer;
+            ringtoneLoaded = true;
+            const displayName = storedName || "Your Ringtone";
+            ringtoneStatusSpan.innerHTML = `✅ PERMANENT RINGTONE ACTIVE: "${displayName}" · Saved FOREVER! Will play on birthday countdown ZERO! 🎂`;
+            ringtoneStatusSpan.style.color = '#a5ffb0';
+            ringtoneStatusSpan.style.background = 'rgba(0,0,0,0.7)';
+            resolve(true);
+          }, (error) => {
+            console.error("Decode error:", error);
+            ringtoneStatusSpan.innerHTML = `⚠️ Failed to decode saved ringtone. The file might be corrupted. Please re-upload.`;
+            ringtoneStatusSpan.style.color = '#ffaa66';
+            currentAudioBuffer = null;
+            ringtoneLoaded = false;
+            resolve(false);
+          });
+        });
+      } catch(e) {
+        console.warn("Failed to load ringtone from storage", e);
+        ringtoneStatusSpan.innerHTML = `⚠️ Error loading saved ringtone. Please upload again.`;
+        ringtoneStatusSpan.style.color = '#ffaa66';
+        currentAudioBuffer = null;
+        ringtoneLoaded = false;
+        return false;
+      }
+    } else {
+      ringtoneStatusSpan.innerHTML = `🎵 No permanent ringtone saved. Upload your favorite audio (MP3/WAV/OGG) — it will be saved FOREVER and auto-play on your birthday!`;
+      ringtoneStatusSpan.style.color = '#FFBC6E';
+      ringtoneLoaded = false;
+      return false;
+    }
+  }
+  
+  // Save uploaded file to localStorage as base64 (PERMANENT)
+  function saveRingtonePermanently(file, audioBuffer) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const base64Data = event.target.result.split(',')[1];
+      if (base64Data) {
+        localStorage.setItem(STORED_CUSTOM_RINGTONE_KEY, base64Data);
+        localStorage.setItem(STORED_RINGTONE_NAME_KEY, file.name);
+        ringtoneStatusSpan.innerHTML = `💾 RINGTONE PERMANENTLY SAVED: "${file.name}" · It will NEVER disappear, even after closing browser or restarting! Will play automatically on your birthday.`;
+        ringtoneStatusSpan.style.color = '#a5ffb0';
+        currentAudioBuffer = audioBuffer;
+        ringtoneLoaded = true;
+        ringtonePlayedThisBirthday = false;
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+  
+  // Handle file upload - SAVES PERMANENTLY TO LOCALSTORAGE
+  customFileInput.addEventListener('change', async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('audio/')) {
+      alert("Please select an audio file (MP3, WAV, OGG, etc.)");
+      return;
+    }
+    
+    ringtoneStatusSpan.innerHTML = `🔄 Processing "${file.name}"...`;
+    
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    const arrayBuffer = await file.arrayBuffer();
+    audioContext.decodeAudioData(arrayBuffer, (buffer) => {
+      currentAudioBuffer = buffer;
+      saveRingtonePermanently(file, buffer);
+    }, (error) => {
+      alert("Error decoding audio file. Please try a different format (MP3, WAV, OGG recommended).");
+      console.error(error);
+      ringtoneStatusSpan.innerHTML = `❌ Failed to decode audio file. Please try another format.`;
+    });
+  });
+  
+  // Play custom ringtone from permanent buffer
+  async function playCustomRingtone() {
+    stopAllAudio();
+    
+    if (!currentAudioBuffer || !ringtoneLoaded) {
+      ringtoneStatusSpan.innerHTML = `🔄 Attempting to reload ringtone from permanent storage...`;
+      const loaded = await loadPermanentRingtoneFromStorage();
+      if (!loaded || !currentAudioBuffer) {
+        ringtoneStatusSpan.innerHTML = `❌ No ringtone found in permanent storage. Please upload an audio file first.`;
+        return;
+      }
+    }
+    
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    
+    // Resume audio context if suspended (browsers require user interaction)
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume();
+    }
+    
+    const source = audioContext.createBufferSource();
+    source.buffer = currentAudioBuffer;
+    source.connect(audioContext.destination);
+    source.start();
+    currentSourceNode = source;
+    source.onended = () => { 
+      if (currentSourceNode === source) currentSourceNode = null; 
+    };
+  }
+  
+  // Preview function
+  async function previewCustom() {
+    await playCustomRingtone();
+  }
+  
+  // DELETE ringtone from localStorage
+  function deletePermanentRingtone() {
+    if (confirm("⚠️ WARNING: This will PERMANENTLY DELETE your saved ringtone from this browser. You will need to upload again if you want it back. Continue?")) {
+      localStorage.removeItem(STORED_CUSTOM_RINGTONE_KEY);
+      localStorage.removeItem(STORED_RINGTONE_NAME_KEY);
+      currentAudioBuffer = null;
+      ringtoneLoaded = false;
+      stopAllAudio();
+      ringtoneStatusSpan.innerHTML = `🗑 PERMANENT RINGTONE DELETED! No sound will play on birthday. Upload a new one anytime — it will be saved forever again.`;
+      ringtoneStatusSpan.style.color = '#ffaaaa';
+      ringtonePlayedThisBirthday = false;
+    }
+  }
+  
+  // ---------- CORE BIRTHDAY COUNTER (with permanent ringtone integration) ----------
+  let storedBirthDate = null;
+  let isBigCounterStopped = false;
+  let stoppedRemainingSeconds = null;
+  let mainInterval = null;
+  let clockInterval = null;
+  let miniInterval = null;
+  
+  const liveClockSpan = document.getElementById('liveClockDisplay');
+  const todayWeekdaySpan = document.getElementById('todayWeekday');
+  const todayFullDateSpan = document.getElementById('todayFullDate');
+  const storedBadgeDiv = document.getElementById('storedBadgeArea');
+  const storedBirthdayTextSpan = document.getElementById('storedBirthdayText');
+  const remDaysSpan = document.getElementById('remDaysNum');
+  const remHoursSpan = document.getElementById('remHoursNum');
+  const remMinutesSpan = document.getElementById('remMinutesNum');
+  const remSecondsSpan = document.getElementById('remSecondsNum');
+  const nextBirthdayDescSpan = document.getElementById('nextBirthdayDesc');
+  const ageYearsSpan = document.getElementById('ageYearsVal');
+  const ageMonthsSpan = document.getElementById('ageMonthsVal');
+  const ageDaysSpan = document.getElementById('ageDaysVal');
+  const setupContainer = document.getElementById('setupContainer');
+  const birthdayInput = document.getElementById('birthdayInputSetup');
+  const saveBtn = document.getElementById('saveBirthdayBtn');
+  const resetBtn = document.getElementById('resetBirthdayBtn');
+  const openMiniBtn = document.getElementById('openMiniCounterBtn');
+  const modal = document.getElementById('miniModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const unlockBtn = document.getElementById('unlockMiniBtn');
+  const modalPassword = document.getElementById('modalPassword');
+  const miniContent = document.getElementById('miniContent');
+  
+  function getDayName(date) { return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()]; }
+  function getNextBirthday(birthDate, referenceDate) {
+    if (!birthDate) return null;
+    let next = new Date(referenceDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+    if (next <= referenceDate) next = new Date(referenceDate.getFullYear() + 1, birthDate.getMonth(), birthDate.getDate());
+    return next;
+  }
+  function getRemainingSeconds(birthDate, now) {
+    if (!birthDate) return 0;
+    let nextBDay = getNextBirthday(birthDate, now);
+    if (!nextBDay) return 0;
+    let diffMs = nextBDay - now;
+    const isBirthday = (now.getMonth() === birthDate.getMonth() && now.getDate() === birthDate.getDate());
+    if (isBirthday && diffMs <= 0) diffMs = new Date(now.getFullYear() + 1, birthDate.getMonth(), birthDate.getDate()) - now;
+    return Math.max(0, Math.floor(diffMs / 1000));
+  }
+  function computeAge(birth, today) {
+    let years = today.getFullYear() - birth.getFullYear();
+    let months = today.getMonth() - birth.getMonth();
+    let days = today.getDate() - birth.getDate();
+    if (days < 0) { const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0); days += lastMonth.getDate(); months--; }
+    if (months < 0) { months += 12; years--; }
+    return { years, months, days };
+  }
+  
+  async function updateBigCounter() {
+    if (!storedBirthDate) return;
+    const now = new Date();
+    const age = computeAge(storedBirthDate, now);
+    ageYearsSpan.innerText = age.years;
+    ageMonthsSpan.innerText = age.months;
+    ageDaysSpan.innerText = age.days;
+    let remainingSec;
+    if (isBigCounterStopped && stoppedRemainingSeconds !== null) remainingSec = stoppedRemainingSeconds;
+    else { remainingSec = getRemainingSeconds(storedBirthDate, now); if (!isBigCounterStopped) stoppedRemainingSeconds = remainingSec; }
+    const days = Math.floor(remainingSec / 86400);
+    const hours = Math.floor((remainingSec % 86400) / 3600);
+    const minutes = Math.floor((remainingSec % 3600) / 60);
+    const seconds = remainingSec % 60;
+    remDaysSpan.innerText = days;
+    remHoursSpan.innerText = hours.toString().padStart(2,'0');
+    remMinutesSpan.innerText = minutes.toString().padStart(2,'0');
+    remSecondsSpan.innerText = seconds.toString().padStart(2,'0');
+    
+    const isBirthdayToday = (now.getMonth() === storedBirthDate.getMonth() && now.getDate() === storedBirthDate.getDate());
+    // AUTO PLAY PERMANENT RINGTONE ON BIRTHDAY COUNTDOWN ZERO
+    if (!isBigCounterStopped && isBirthdayToday && remainingSec === 0 && !ringtonePlayedThisBirthday) {
+      if (currentAudioBuffer && ringtoneLoaded) {
+        await playCustomRingtone();
+        ringtonePlayedThisBirthday = true;
+        const cdArea = document.getElementById('countdownLiveArea');
+        if (cdArea) cdArea.classList.add('ringtone-active');
+        const ringtoneName = localStorage.getItem(STORED_RINGTONE_NAME_KEY) || "Your Ringtone";
+        nextBirthdayDescSpan.innerHTML = `🎂 HAPPY BIRTHDAY! 🎂 Playing: "${ringtoneName}" (Permanent Ringtone) 🎵`;
+        setTimeout(() => { if (cdArea) cdArea.classList.remove('ringtone-active'); }, 8000);
+      } else if (localStorage.getItem(STORED_CUSTOM_RINGTONE_KEY)) {
+        await loadPermanentRingtoneFromStorage();
+        if (currentAudioBuffer && ringtoneLoaded) {
+          await playCustomRingtone();
+          ringtonePlayedThisBirthday = true;
+          const cdArea = document.getElementById('countdownLiveArea');
+          if (cdArea) cdArea.classList.add('ringtone-active');
+          const ringtoneName = localStorage.getItem(STORED_RINGTONE_NAME_KEY) || "Your Ringtone";
+          nextBirthdayDescSpan.innerHTML = `🎂 HAPPY BIRTHDAY! 🎂 Playing: "${ringtoneName}" (Permanent) 🎵`;
+          setTimeout(() => { if (cdArea) cdArea.classList.remove('ringtone-active'); }, 8000);
+        }
+      } else {
+        nextBirthdayDescSpan.innerHTML = `🎂 HAPPY BIRTHDAY! 🎂 (No ringtone set)`;
+      }
+    }
+    const nextBDay = getNextBirthday(storedBirthDate, now);
+    if (nextBDay && !isBirthdayToday) {
+      nextBirthdayDescSpan.innerHTML = `Inshallah Next birthday On: ${getDayName(nextBDay)}, ${nextBDay.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+    } else if (isBirthdayToday && !ringtonePlayedThisBirthday) {
+      nextBirthdayDescSpan.innerHTML = `TODAY IS YOUR BIRTHDAY! Countdown zero!`;
+    }
+  }
+  
+  function updateMiniCounter() { 
+    if (!storedBirthDate) return; 
+    const now = new Date(); 
+    const remainingSec = getRemainingSeconds(storedBirthDate, now); 
+    const days = Math.floor(remainingSec/86400), hours = Math.floor((remainingSec%86400)/3600), minutes = Math.floor((remainingSec%3600)/60), seconds = remainingSec%60; 
+    if(document.getElementById('miniDays')) document.getElementById('miniDays').innerText = days; 
+    if(document.getElementById('miniHours')) document.getElementById('miniHours').innerText = hours.toString().padStart(2,'0'); 
+    if(document.getElementById('miniMinutes')) document.getElementById('miniMinutes').innerText = minutes.toString().padStart(2,'0'); 
+    if(document.getElementById('miniSeconds')) document.getElementById('miniSeconds').innerText = seconds.toString().padStart(2,'0'); 
+    const nextBDay = getNextBirthday(storedBirthDate, now); 
+    const isBirthday = (now.getMonth() === storedBirthDate.getMonth() && now.getDate() === storedBirthDate.getDate()); 
+    if(nextBDay && document.getElementById('miniDesc')) { 
+      if(isBirthday && remainingSec===0) document.getElementById('miniDesc').innerHTML = `🎂 BIRTHDAY TODAY! Mini counter celebrates!`; 
+      else document.getElementById('miniDesc').innerHTML = `Mini counter | Next: ${getDayName(nextBDay)}, ${nextBDay.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}`; 
+    } 
+  }
+  function updateRealtimeClock() { const now = new Date(); liveClockSpan.innerText = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`; todayWeekdaySpan.innerText = getDayName(now); todayFullDateSpan.innerText = `${now.toLocaleString('default',{month:'long'})} ${now.getDate()}, ${now.getFullYear()}`; }
+  function stopBigCounter() { if (!storedBirthDate) alert("Set birthday first!"); else if (!isBigCounterStopped) { stoppedRemainingSeconds = getRemainingSeconds(storedBirthDate, new Date()); isBigCounterStopped = true; alert("Big counter frozen!"); } else alert("Already stopped."); }
+  function openModal() { modal.classList.add('active'); modalPassword.value = ''; miniContent.style.display = 'none'; } function closeModal() { modal.classList.remove('active'); }
+  function checkPasswordAndShow() { if(modalPassword.value === "3211") { miniContent.style.display = 'block'; updateMiniCounter(); if (!miniInterval) miniInterval = setInterval(() => { if(storedBirthDate) updateMiniCounter(); }, 1000); } else alert("Wrong password!"); }
+  function persistBirthday(dateObj) { localStorage.setItem('eternal_birthday', `${dateObj.getFullYear()}-${String(dateObj.getMonth()+1).padStart(2,'0')}-${String(dateObj.getDate()).padStart(2,'0')}`); }
+  function loadStoredBirthday() { const stored = localStorage.getItem('eternal_birthday'); if(!stored) return null; const [year,month,day] = stored.split('-').map(Number); return new Date(year,month-1,day); }
+  function clearStoredBirthday() { localStorage.removeItem('eternal_birthday'); storedBirthDate = null; isBigCounterStopped = false; ringtonePlayedThisBirthday = false; setupContainer.style.display = 'block'; storedBadgeDiv.style.display = 'none'; remDaysSpan.innerText = '--'; remHoursSpan.innerText = '--'; remMinutesSpan.innerText = '--'; remSecondsSpan.innerText = '--'; nextBirthdayDescSpan.innerHTML = 'Set your birthday'; ageYearsSpan.innerText = '—'; ageMonthsSpan.innerText = '—'; ageDaysSpan.innerText = '—'; }
+  function updateUIVisibility() { if(!storedBirthDate) { setupContainer.style.display = 'block'; storedBadgeDiv.style.display = 'none'; } else { setupContainer.style.display = 'none'; storedBadgeDiv.style.display = 'block'; storedBirthdayTextSpan.innerText = storedBirthDate.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}); } }
+  function setBirthdayAndSave(dateString) { const [year,month,day] = dateString.split('-').map(Number); const birthObj = new Date(year,month-1,day); if(isNaN(birthObj.getTime())) return alert("Invalid date"); storedBirthDate = birthObj; persistBirthday(storedBirthDate); isBigCounterStopped = false; ringtonePlayedThisBirthday = false; updateUIVisibility(); updateBigCounter(); return true; }
+  function resetBirthdayAction() { if(confirm("Reset stored birthday?")) { clearStoredBirthday(); storedBirthDate = null; updateUIVisibility(); if(birthdayInput) birthdayInput.value = "2000-01-01"; } }
+  function startIntervals() { if(mainInterval) clearInterval(mainInterval); if(clockInterval) clearInterval(clockInterval); updateRealtimeClock(); clockInterval = setInterval(updateRealtimeClock,1000); mainInterval = setInterval(() => { if(storedBirthDate) updateBigCounter(); },1000); }
+  
+  async function init() {
+    // Load saved permanent ringtone from localStorage
+    await loadPermanentRingtoneFromStorage();
+    
+    const loaded = loadStoredBirthday();
+    if(loaded) { storedBirthDate = loaded; updateUIVisibility(); startIntervals(); updateBigCounter(); } 
+    else { storedBirthDate = null; updateUIVisibility(); startIntervals(); }
+    
+    previewCustomBtn.addEventListener('click', () => previewCustom());
+    removeCustomBtn.addEventListener('click', () => deletePermanentRingtone());
+    playCustomBtn.addEventListener('click', () => playCustomRingtone());
+    stopRingtoneBtn.addEventListener('click', () => stopAllAudio());
+    saveBtn.addEventListener('click', () => { if(birthdayInput.value && setBirthdayAndSave(birthdayInput.value)) updateBigCounter(); });
+    resetBtn.addEventListener('click', resetBirthdayAction);
+    stopCounterBtn.addEventListener('click', stopBigCounter);
+    openMiniBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    unlockBtn.addEventListener('click', checkPasswordAndShow);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+  }
+  init();
+</script>
+</body>
+</html>
